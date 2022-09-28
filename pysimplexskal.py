@@ -11,7 +11,7 @@ bix=npzfile['bix']
 zcheat=npzfile['zcheat']
 xcheat=npzfile['xcheat']
 
-A = np.matrix('1 1 1 0 0; 1 0 0 1 0; 8 20 0 0 1')       #test från martin 14-17
+A = np.matrix('1 1 1 0 0; 1 0 0 1 0; 8 20 0 0 1')       #test från martin 14-17 ##
 b = np.array([1, 0.75,10])
 c = np.array([2, 1, 0, 0, 0])
 bix = np.array([3,4,5])
