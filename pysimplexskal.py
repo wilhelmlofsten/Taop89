@@ -74,9 +74,9 @@ while iter >= 0:
 
     rc_min = np.amin(cNHatt)                    #steg 5-6           hittat största 
     #print(rc_min)
-    inkvar = np.argmin(cNHatt)            #    #steg7              kanske fel sehit med inkvar
-    #inix = np.argmin(cNHatt)
-    #inkvar = nix[inix]
+    #inkvar = np.argmin(cNHatt)            #    #steg7              kanske fel sehit med inkvar
+    inix = np.argmin(cNHatt)
+    inkvar = nix[inix]
     #print(inkvar)
 
     
@@ -87,7 +87,22 @@ while iter >= 0:
         # construct solution, x, and check it
         # --------
 
+        zeroToAdd = len(nix)
+        zeroToAdd = np.zeros((zeroToAdd))
+        #x = np.add(bix,zeroToAdd)
+        print(zeroToAdd)
+        print(bix)
+        #x = (bix + zeroToAdd)
+        
+        x = np.concatenate(bix,zeroToAdd)
 
+        
+        
+        #x = np.zeros((len(nix)+len(bix))) 
+        #x = np.add(bix,x)
+        #x = np.zeros(5) 
+
+        print(x)
 
         diffx = np.linalg.norm(x-xcheat)
         diffz = z-zcheat
@@ -97,7 +112,8 @@ while iter >= 0:
         # calc entering column, a
         # --------
 
-        a = N[:, inkvar]                    #ksk matris? ist för vektor då print saknar punkter
+        #a = N[:, inkvar]                    #ksk matris? ist för vektor då print saknar punkter
+        a = N[:, inix]                          #ksk fel här med inix
         #print(a)
 
         if max(a) <= 0 :
@@ -120,10 +136,12 @@ while iter >= 0:
                 if counter > 0 and 0 <= a[i] and tempMin > bHatt[i]/a[i]:
                     tempMin = (bHatt[i]/a[i])
                     utgvar = bix[i] 
+                    utix = i
                 if (counter == 0 and 0 <= a[i]):                                #b[x]/a[x]) < tempMin
                     counter = 1
                     tempMin = (bHatt[i]/a[i]) 
                     utgvar = bix[i] 
+                    utix = i
                 i +=1
 
             print(utgvar)                                           # 3an representerar x4 ... (ty bix -1)       
@@ -134,16 +152,21 @@ while iter >= 0:
             # --------
 
             print(inkvar)
+            print(inix)
             print(utgvar)
-            print(nix[np.where(inkvar)])
-            print(bix[np.where(utgvar)])
-            nix[np.where(inkvar)] = utgvar              #bix[utix]=nix[inix]
+            print(utix)
+
+            #print(nix[np.where(inkvar)])
+            #print(bix[np.where(utgvar)])
+            #nix[np.where(inkvar)] = utgvar              #bix[utix]=nix[inix]
             #bix[np.where(utgvar)] = inkvar          #steg 11 uppdaterat bix och nix
+            bix[utix]=nix[inix]
+            nix[inix]=utgvar
 
 
             print("teeest")
             print(nix)
-            #print(bix)
+            print(bix)
 
             B  = A[:, bix]
             print("B kommer nedan")
