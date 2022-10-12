@@ -8,7 +8,6 @@ from math import sqrt
 import gurobipy as gp
 from gurobipy import GRB
 
-allow_pickle = True                         #Pickle
 
 pri=0
 
